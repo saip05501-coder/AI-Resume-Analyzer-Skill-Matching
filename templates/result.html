@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Results</title>
+</head>
+<body>
+
+<h2>Results for Job Role: {{ job_role }}</h2>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Rank</th>
+        <th>Resume</th>
+        <th>Score (%)</th>
+        <th>Matched Skills</th>
+        <th>Missing Skills</th>
+    </tr>
+
+    {% for r in resumes %}
+    <tr>
+        <td>{{ r.rank }}</td>
+        <td>{{ r.name }}</td>
+        <td>{{ r.score }}</td>
+        <td>{{ r.found_skills | join(', ') }}</td>
+        <td>{{ r.missing_skills | join(', ') }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+<a href="/">Analyze Again</a>
+
+</body>
+</html>
