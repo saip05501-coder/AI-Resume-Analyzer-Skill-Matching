@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Resume System</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Poppins, sans-serif;
+            background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            display: flex;
+            gap: 40px;
+        }
+
+        .card {
+            width: 320px;
+            padding: 40px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .card h2 {
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="card" onclick="window.location.href='/rank'">
+        <h2>📊 Rank Multiple Resumes</h2>
+        <p>
+            Upload multiple resumes and rank them using
+            ATS + Machine Learning logic.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>📄 Analyze Single Resume</h2>
+        <p>
+            Detailed analysis of one resume
+            (coming soon).
+        </p>
+    </div>
+
+</div>
+
+</body>
+</html>

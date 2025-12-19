@@ -1,42 +1,120 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Resume Analysis Result</title>
+<meta charset="UTF-8">
+<title>Ranking Results</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#141e30,#243b55);
+    padding:40px;
+    color:#fff;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.table-container{
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(15px);
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 30px 70px rgba(0,0,0,0.5);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:15px;
+    text-align:center;
+}
+
+th{
+    background:rgba(255,255,255,0.15);
+    font-weight:600;
+}
+
+tr:nth-child(even){
+    background:rgba(255,255,255,0.05);
+}
+
+.rank{
+    font-weight:700;
+    color:#00eaff;
+}
+
+.missing{
+    font-size:13px;
+    color:#ffb347;
+}
+
+.back{
+    display:inline-block;
+    margin-top:30px;
+    padding:12px 30px;
+    background:linear-gradient(90deg,#00d4ff,#6a5acd);
+    border-radius:30px;
+    text-decoration:none;
+    color:#fff;
+    font-weight:600;
+}
+</style>
 </head>
+
 <body>
 
-<h2>Results for Job Role: {{ role }}</h2>
+<h1>Resume Ranking Results<br><small>Job Role: {{ role }}</small></h1>
 
-<table border="1" cellpadding="10">
-    <tr>
-        <th>Rank</th>
-        <th>Resume Name</th>
-        <th>ATS Score (%)</th>
-        <th>ML Score (%)</th>
-        <th>Final Score (%)</th>
-        <th>Missing Skills</th>
-    </tr>
+<div class="table-container">
 
-    {% for r in resumes %}
-    <tr>
-        <td>{{ r.rank }}</td>
-        <td>{{ r.name }}</td>
-        <td>{{ r.ats_score }}</td>
-        <td>{{ r.ml_score }}</td>
-        <td>{{ r.final_score }}</td>
-        <td>
-            {% if r.missing_skills %}
-                {{ r.missing_skills | join(', ') }}
-            {% else %}
-                None
-            {% endif %}
-        </td>
-    </tr>
-    {% endfor %}
+<table>
+<tr>
+    <th>Rank</th>
+    <th>Resume</th>
+    <th>ATS %</th>
+    <th>ML %</th>
+    <th>Final %</th>
+    <th>Missing Skills</th>
+</tr>
+
+{% for r in resumes %}
+<tr>
+    <td class="rank">{{ r.rank }}</td>
+    <td>{{ r.name }}</td>
+    <td>{{ r.ats_score }}</td>
+    <td>{{ r.ml_score }}</td>
+    <td>{{ r.final_score }}</td>
+    <td class="missing">
+        {% if r.missing_skills %}
+            {{ r.missing_skills | join(', ') }}
+        {% else %}
+            None
+        {% endif %}
+    </td>
+</tr>
+{% endfor %}
 </table>
 
-<br>
-<a href="/">Analyze Again</a>
+</div>
+
+<div style="text-align:center">
+    <a href="/analyze" class="back">Analyze Again</a>
+</div>
 
 </body>
 </html>

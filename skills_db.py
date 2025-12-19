@@ -1,89 +1,156 @@
 JOB_ROLES = {
 
-    "Python Developer": {
-        "skills": [
-            "python", "flask", "django", "sql",
-            "machine learning", "api", "git"
-        ],
-        "description": "Python developer with backend development, REST APIs, databases, and machine learning exposure"
-    },
-
     "Data Scientist": {
-        "skills": [
-            "python", "machine learning", "statistics",
-            "pandas", "numpy", "sql", "data analysis"
+        "must_have_skills": [
+            "python",
+            "machine learning",
+            "statistics",
+            "pandas",
+            "data analysis"
         ],
-        "description": "Data scientist skilled in analytics, statistics, machine learning, and data processing"
+        "optional_skills": [
+            "numpy",
+            "sql",
+            "deep learning",
+            "tensorflow",
+            "scikit learn"
+        ]
     },
 
     "Web Developer": {
-        "skills": [
-            "html", "css", "javascript",
-            "react", "node", "mongodb", "git"
+        "must_have_skills": [
+            "html",
+            "css",
+            "javascript",
+            "web development"
         ],
-        "description": "Web developer experienced in frontend, backend, and full-stack web technologies"
+        "optional_skills": [
+            "react",
+            "node",
+            "django",
+            "bootstrap"
+        ]
     },
 
     "Java Developer": {
-        "skills": [
-            "java", "spring", "hibernate",
-            "mysql", "rest api", "git"
+        "must_have_skills": [
+            "java",
+            "oops",
+            "spring",
+            "data structures"
         ],
-        "description": "Java developer with experience in enterprise applications and RESTful services"
+        "optional_skills": [
+            "hibernate",
+            "sql",
+            "microservices",
+            "rest api"
+        ]
     },
 
-    "DevOps Engineer": {
-        "skills": [
-            "linux", "aws", "docker",
-            "kubernetes", "ci/cd", "jenkins",
-            "terraform", "git"
+    "AI Engineer": {
+        "must_have_skills": [
+            "python",
+            "machine learning",
+            "deep learning",
+            "neural networks"
         ],
-        "description": "DevOps engineer focused on cloud infrastructure, automation, and CI/CD pipelines"
+        "optional_skills": [
+            "tensorflow",
+            "pytorch",
+            "nlp",
+            "computer vision"
+        ]
     },
 
-    "Cloud Engineer": {
-        "skills": [
-            "aws", "azure", "gcp",
-            "linux", "docker", "kubernetes",
-            "cloud security"
+    "Backend Developer": {
+        "must_have_skills": [
+            "python",
+            "django",
+            "rest api",
+            "sql",
+            "backend development"
         ],
-        "description": "Cloud engineer skilled in cloud platforms, containerization, and cloud security"
+        "optional_skills": [
+            "flask",
+            "postgresql",
+            "docker",
+            "redis"
+        ]
     },
 
-    "Machine Learning Engineer": {
-        "skills": [
-            "python", "machine learning", "deep learning",
-            "tensorflow", "pytorch",
-            "model deployment", "data preprocessing"
+    "Frontend Developer": {
+        "must_have_skills": [
+            "html",
+            "css",
+            "javascript",
+            "react"
         ],
-        "description": "Machine learning engineer specialized in model development, training, and deployment"
-    },
-
-    "Data Analyst": {
-        "skills": [
-            "sql", "excel", "python",
-            "pandas", "data visualization",
-            "power bi", "tableau"
-        ],
-        "description": "Data analyst experienced in data querying, visualization, and business reporting"
+        "optional_skills": [
+            "redux",
+            "typescript",
+            "bootstrap",
+            "webpack"
+        ]
     },
 
     "Full Stack Developer": {
-        "skills": [
-            "html", "css", "javascript",
-            "react", "node", "express",
-            "mongodb", "sql", "git"
+        "must_have_skills": [
+            "html",
+            "css",
+            "javascript",
+            "python",
+            "django"
         ],
-        "description": "Full stack developer proficient in frontend, backend, and database technologies"
+        "optional_skills": [
+            "react",
+            "node",
+            "mongodb",
+            "docker"
+        ]
     },
 
-    "Cyber Security Analyst": {
-        "skills": [
-            "network security", "penetration testing",
-            "ethical hacking", "linux",
-            "firewalls", "incident response"
+    "DevOps Engineer": {
+        "must_have_skills": [
+            "linux",
+            "docker",
+            "aws",
+            "ci cd"
         ],
-        "description": "Cyber security analyst focused on threat detection, prevention, and incident response"
-    }
+        "optional_skills": [
+            "kubernetes",
+            "terraform",
+            "jenkins",
+            "ansible"
+        ]
+    },
 
+    "Data Analyst": {
+        "must_have_skills": [
+            "python",
+            "sql",
+            "excel",
+            "data analysis"
+        ],
+        "optional_skills": [
+            "power bi",
+            "tableau",
+            "pandas",
+            "statistics"
+        ]
+    },
+
+    "Mobile App Developer": {
+        "must_have_skills": [
+            "android",
+            "java",
+            "kotlin",
+            "mobile development"
+        ],
+        "optional_skills": [
+            "flutter",
+            "react native",
+            "firebase",
+            "ios"
+        ]
+    }
 }

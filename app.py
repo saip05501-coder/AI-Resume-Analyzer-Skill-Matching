@@ -1,63 +1,67 @@
-from flask import Flask, render_template, request
 import os
-from werkzeug.utils import secure_filename
-from utils import (
-    extract_text_from_pdf,
-    extract_skills,
-    calculate_ats_score,
-    calculate_ml_score
-)
+from flask import Flask, render_template, request
+from utils import *
 from skills_db import JOB_ROLES
 
-UPLOAD_FOLDER = "static/uploads"
+app = Flask(__name__)
+
+UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-app = Flask(__name__)
-app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+# ---------------- MAIN PAGE (2 OPTIONS) ----------------
+@app.route("/")
+def main():
+    return render_template("main.html")
 
 
-@app.route("/", methods=["GET", "POST"])
-def index():
+# ---------------- INTRO PAGE (DO NOT DELETE) ----------------
+@app.route("/rank")
+def rank_intro():
+    return render_template("home.html")
+
+
+# ---------------- ACTUAL RESUME ANALYZER ----------------
+@app.route("/analyze", methods=["GET", "POST"])
+def analyze():
     if request.method == "POST":
-
         role = request.form["job_role"]
-        role_data = JOB_ROLES[role]
-        required_skills = role_data["skills"]
-        job_description = role_data["description"]
+        files = request.files.getlist("resume")
 
-        resumes = request.files.getlist("resume")
+        job_requirements = JOB_ROLES[role]
         results = []
 
-        for resume in resumes:
-            filename = secure_filename(resume.filename)
-            path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
-            resume.save(path)
+        for file in files:
+            if file.filename == "":
+                continue
 
-            text = extract_text_from_pdf(path)
+            path = os.path.join(UPLOAD_FOLDER, file.filename)
+            file.save(path)
 
-            found_skills = extract_skills(text, required_skills)
-            missing_skills = list(set(required_skills) - set(found_skills))
+            resume_text = extract_text_from_pdf(path)
 
-            ats_score = calculate_ats_score(found_skills, required_skills)
-            ml_score = calculate_ml_score(text, job_description)
+            ats = calculate_ats_score(resume_text, job_requirements)
+            ml = calculate_ml_score(resume_text, job_requirements)
+            final = calculate_total_score(ats, ml)
 
-            # 🔥 HYBRID SCORE
-            final_score = round((ats_score * 0.6) + (ml_score * 0.4), 2)
+            missing = get_missing_skills(
+                resume_text,
+                job_requirements["must_have_skills"]
+            )
 
             results.append({
-                "name": filename,
-                "ats_score": ats_score,
-                "ml_score": ml_score,
-                "final_score": final_score,
-                "missing_skills": missing_skills
+                "name": file.filename,
+                "ats_score": ats,
+                "ml_score": ml,
+                "final_score": final,
+                "missing_skills": missing
             })
 
-        ranked = sorted(results, key=lambda x: x["final_score"], reverse=True)
+        results.sort(key=lambda x: x["final_score"], reverse=True)
 
-        for i, r in enumerate(ranked, start=1):
-            r["rank"] = i
+        for i, r in enumerate(results):
+            r["rank"] = i + 1
 
-        return render_template("result.html", resumes=ranked, role=role)
+        return render_template("result.html", resumes=results, role=role)
 
     return render_template("index.html", roles=JOB_ROLES.keys())
 

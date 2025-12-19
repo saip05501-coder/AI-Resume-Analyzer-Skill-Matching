@@ -3,3 +3,9 @@ sentence-transformers
 torch
 transformers
 pymupdf
+scikit-learn
+numpy
+flask
+scikit-learn
+numpy
+PyPDF2

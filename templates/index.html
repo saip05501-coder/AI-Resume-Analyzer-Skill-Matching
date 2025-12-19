@@ -1,31 +1,129 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>AI Resume Analyzer</title>
+<meta charset="UTF-8">
+<title>Resume Ranking | AI Analyzer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+}
+
+.wrapper{
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(18px);
+    padding:50px;
+    width:100%;
+    max-width:900px;
+    border-radius:22px;
+    box-shadow:0 30px 70px rgba(0,0,0,0.5);
+}
+
+h1{
+    text-align:center;
+    font-size:36px;
+    font-weight:700;
+}
+
+p{
+    text-align:center;
+    margin-top:10px;
+    color:#ddd;
+}
+
+form{
+    margin-top:40px;
+}
+
+label{
+    font-weight:600;
+    display:block;
+    margin-bottom:10px;
+}
+
+select,input{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:none;
+    outline:none;
+    font-size:15px;
+    margin-bottom:25px;
+}
+
+input[type="file"]{
+    background:#fff;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:40px;
+    font-size:16px;
+    font-weight:600;
+    background:linear-gradient(90deg,#00d4ff,#6a5acd);
+    color:#fff;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 40px rgba(0,212,255,0.4);
+}
+
+.footer{
+    text-align:center;
+    margin-top:25px;
+    font-size:13px;
+    color:#ccc;
+}
+</style>
 </head>
+
 <body>
 
-<h2>Hybrid ATS + ML Resume Analyzer</h2>
+<div class="wrapper">
 
-<form method="POST" enctype="multipart/form-data">
+    <h1>AI Resume Ranking System</h1>
+    <p>Upload multiple resumes and rank them using ATS + ML logic</p>
 
-    <label><b>Select Job Role:</b></label><br>
-    <select name="job_role" required>
-        {% for role in roles %}
+    <form method="POST" action="/analyze" enctype="multipart/form-data">
+
+        <label>Select Job Role</label>
+        <select name="job_role" required>
+            {% for role in roles %}
             <option value="{{ role }}">{{ role }}</option>
-        {% endfor %}
-    </select>
+            {% endfor %}
+        </select>
 
-    <br><br>
+        <label>Upload Resumes (PDF only)</label>
+        <input type="file" name="resume" accept=".pdf" multiple required>
 
-    <label><b>Upload Resumes (PDF only):</b></label><br>
-    <input type="file" name="resume" multiple accept=".pdf" required>
+        <button type="submit">Analyze & Rank Resumes</button>
 
-    <br><br>
+    </form>
 
-    <button type="submit">Analyze & Rank Resumes</button>
+    <div class="footer">
+        AI Resume Analyzer • Final Year Project
+    </div>
 
-</form>
+</div>
 
 </body>
 </html>

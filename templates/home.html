@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Resume Analyzer</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            background: radial-gradient(circle at top, #1e1e2f, #0f0f1a);
+            color: #fff;
+            overflow: hidden;
+        }
+
+        /* BACKGROUND GLOW */
+        .bg-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(45deg, #6a5acd, #00d4ff);
+            filter: blur(180px);
+            opacity: 0.6;
+            top: -200px;
+            left: -200px;
+        }
+
+        .container {
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .glass-box {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px);
+            border-radius: 24px;
+            padding: 60px;
+            max-width: 1100px;
+            width: 100%;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 50px;
+        }
+
+        /* LEFT CONTENT */
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, #6a5acd, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #ddd;
+            line-height: 1.6;
+        }
+
+        .cta-btn {
+            margin-top: 35px;
+            padding: 14px 34px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(90deg, #6a5acd, #00d4ff);
+            color: #fff;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,212,255,0.4);
+        }
+
+        /* RIGHT FEATURE CARDS */
+        .features {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.12);
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: #ccc;
+            line-height: 1.5;
+        }
+
+        /* FOOTER */
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 13px;
+            color: #aaa;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .glass-box {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+
+<div class="container">
+    <div class="glass-box">
+
+        <!-- LEFT -->
+        <div class="hero">
+            <h1>
+                AI-Powered <br>
+                <span>Resume Analyzer</span>
+            </h1>
+
+            <p>
+                A skill-focused ATS + Machine Learning system that
+                intelligently ranks multiple resumes, detects missing skills,
+                and finds the best match for each job role.
+            </p>
+
+            <button class="cta-btn" onclick="window.location.href='/analyze'">
+                Start Resume Ranking →
+            </button>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="features">
+            <div class="feature-card">
+                <h3>🚀 ATS-Optimized Scoring</h3>
+                <p>
+                    Matches resumes against job-specific skills
+                    using industry-style ATS logic.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🧠 ML + TF-IDF Matching</h3>
+                <p>
+                    Uses TF-IDF and cosine similarity to understand
+                    contextual relevance.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>📊 Smart Resume Ranking</h3>
+                <p>
+                    Combines ATS & ML scores to produce
+                    accurate, explainable rankings.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="footer">
+    Final Year Project • AI Resume Screening System
+</div>
+
+</body>
+</html>
