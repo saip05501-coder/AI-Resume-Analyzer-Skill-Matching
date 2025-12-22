@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Ranking Results</title>
+<title>Resume Ranking Results</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -15,80 +15,105 @@
 }
 
 body{
-    min-height:100vh;
-    background:linear-gradient(135deg,#141e30,#243b55);
+    background:#f4f6f8;
     padding:40px;
-    color:#fff;
+    color:#000;
 }
 
 h1{
     text-align:center;
-    margin-bottom:30px;
+    margin-bottom:25px;
 }
 
 .table-container{
-    background:rgba(255,255,255,0.08);
-    backdrop-filter:blur(15px);
-    border-radius:20px;
+    background:#fff;
     padding:30px;
-    box-shadow:0 30px 70px rgba(0,0,0,0.5);
+    border-radius:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.15);
 }
 
 table{
     width:100%;
     border-collapse:collapse;
+    font-size:14px;
 }
 
-th,td{
-    padding:15px;
+th, td{
+    border:1px solid #444;
+    padding:10px;
     text-align:center;
 }
 
 th{
-    background:rgba(255,255,255,0.15);
+    background:#eaeaea;
     font-weight:600;
-}
-
-tr:nth-child(even){
-    background:rgba(255,255,255,0.05);
 }
 
 .rank{
     font-weight:700;
-    color:#00eaff;
 }
 
-.missing{
-    font-size:13px;
-    color:#ffb347;
+.actions{
+    text-align:center;
+    margin-top:25px;
 }
 
-.back{
-    display:inline-block;
-    margin-top:30px;
-    padding:12px 30px;
-    background:linear-gradient(90deg,#00d4ff,#6a5acd);
-    border-radius:30px;
-    text-decoration:none;
+.btn{
+    padding:12px 28px;
+    margin:0 10px;
+    border:none;
+    border-radius:6px;
+    font-size:14px;
+    cursor:pointer;
+    background:#2c5364;
     color:#fff;
-    font-weight:600;
+    text-decoration:none;
+}
+
+/* ---------------- PRINT STYLES ---------------- */
+@media print {
+
+    body{
+        background:#fff;
+        padding:0;
+    }
+
+    .actions{
+        display:none;
+    }
+
+    h1{
+        margin-bottom:15px;
+    }
+
+    table{
+        font-size:12px;
+    }
+
+    th{
+        background:#ddd !important;
+        -webkit-print-color-adjust: exact;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<h1>Resume Ranking Results<br><small>Job Role: {{ role }}</small></h1>
+<h1>
+   
+    <small>Job Role: {{ role }}</small>
+</h1>
 
 <div class="table-container">
 
 <table>
 <tr>
     <th>Rank</th>
-    <th>Resume</th>
-    <th>ATS %</th>
-    <th>ML %</th>
-    <th>Final %</th>
+    <th>Resume Name</th>
+    <th>ATS Score</th>
+    <th>ML Score</th>
+    <th>Final Score</th>
     <th>Missing Skills</th>
 </tr>
 
@@ -99,7 +124,7 @@ tr:nth-child(even){
     <td>{{ r.ats_score }}</td>
     <td>{{ r.ml_score }}</td>
     <td>{{ r.final_score }}</td>
-    <td class="missing">
+    <td>
         {% if r.missing_skills %}
             {{ r.missing_skills | join(', ') }}
         {% else %}
@@ -112,8 +137,13 @@ tr:nth-child(even){
 
 </div>
 
-<div style="text-align:center">
-    <a href="/analyze" class="back">Analyze Again</a>
+<div class="actions">
+    <button class="btn" onclick="window.print()">Print Result (PDF)</button>
+    <a href="/download_excel" class="btn">Download Excel</a>
+</div>
+
+<div class="bottom-left">
+    <a href="/analyze" class="back-btn">← Analyze Again</a>
 </div>
 
 </body>
