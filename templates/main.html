@@ -1,73 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>AI Resume System</title>
+<meta charset="UTF-8">
+<title>AI Resume Analyzer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Poppins, sans-serif;
-            background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
-            color: #fff;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-        .container {
-            display: flex;
-            gap: 40px;
-        }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
 
-        .card {
-            width: 320px;
-            padding: 40px;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(12px);
-            border-radius: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
+body{
+    min-height:100vh;
+    background:linear-gradient(120deg,#0f2027,#203a43,#2c5364);
+    color:#ffffff;
+    display:flex;
+    flex-direction:column;
+}
 
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-        }
+/* HEADER */
+header{
+    padding:30px 60px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
 
-        .card h2 {
-            margin-bottom: 15px;
-        }
+header h1{
+    font-size:24px;
+    font-weight:600;
+}
 
-        .card p {
-            font-size: 14px;
-            color: #ddd;
-        }
-    </style>
+header span{
+    color:#00e6e6;
+}
+
+/* HERO */
+.hero{
+    text-align:center;
+    margin-top:40px;
+}
+
+.hero h2{
+    font-size:42px;
+    margin-bottom:15px;
+}
+
+.hero p{
+    font-size:16px;
+    color:#dcdcdc;
+    max-width:720px;
+    margin:auto;
+    line-height:1.6;
+}
+
+/* CARDS */
+.container{
+    display:flex;
+    justify-content:center;
+    gap:40px;
+    margin-top:70px;
+    flex-wrap:wrap;
+}
+
+.card{
+    width:340px;
+    padding:45px 35px;
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(14px);
+    border-radius:22px;
+    text-align:center;
+    cursor:pointer;
+    transition:all 0.35s ease;
+    position:relative;
+}
+
+.card:hover{
+    transform:translateY(-14px);
+    box-shadow:0 25px 50px rgba(0,0,0,0.45);
+}
+
+.card h3{
+    font-size:22px;
+    margin-bottom:12px;
+}
+
+.card p{
+    font-size:14px;
+    color:#e0e0e0;
+    line-height:1.6;
+    margin-bottom:25px;
+}
+
+.card button{
+    padding:12px 28px;
+    border:none;
+    border-radius:30px;
+    background:#00e6e6;
+    color:#003333;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.card button:hover{
+    background:#00cccc;
+}
+
+/* FOOTER */
+footer{
+    margin-top:auto;
+    text-align:center;
+    padding:20px;
+    font-size:13px;
+    color:#cccccc;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .hero h2{
+        font-size:32px;
+    }
+    header{
+        padding:20px 30px;
+    }
+}
+</style>
 </head>
+
 <body>
 
-<div class="container">
+<header>
+    <h1><span>Resume Analyzer</span></h1>
+</header>
 
-    <div class="card" onclick="window.location.href='/rank'">
-        <h2>📊 Rank Multiple Resumes</h2>
-        <p>
-            Upload multiple resumes and rank them using
-            ATS + Machine Learning logic.
-        </p>
-    </div>
+<section class="hero">
+    <h2>Smart Resume Screening Made Easy</h2>
+    <p>
+        Skill-focused ATS + Machine Learning system that ranks resumes
+        using TF-IDF and cosine similarity for accurate candidate selection.
+    </p>
+</section>
 
+<section class="container">
+
+     <!-- SINGLE RESUME (FUTURE) -->
     <div class="card">
-        <h2>📄 Analyze Single Resume</h2>
+        <h3>📄 Analyze Single Resume</h3>
         <p>
-            Detailed analysis of one resume
-            (coming soon).
+            Detailed ATS score, missing skills analysis,
+            and personalized improvement suggestions.
         </p>
+        <button disabled>Coming Soon</button>
     </div>
 
-</div>
+    <!-- MULTIPLE RESUME RANKING -->
+    <div class="card" onclick="window.location.href='/rank'">
+        <h3>📊 Rank Multiple Resumes</h3>
+        <p>
+            Upload multiple resumes and automatically rank candidates
+            based on job-specific skill matching and ATS logic.
+        </p>
+        <button>Start Ranking</button>
+    </div>
+
+   
+
+</section>
+
+<footer>
+    © 2025 AI Resume Analyzer • ATS + ML Powered
+</footer>
 
 </body>
 </html>
