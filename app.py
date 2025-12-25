@@ -1,6 +1,9 @@
 import os
 import pandas as pd
 from flask import Flask, render_template, request, send_file
+from skills_db import ALL_SKILLS
+from utils import clean_text
+
 
 from utils import (
     extract_text_from_pdf,
@@ -109,6 +112,43 @@ def download_excel():
         as_attachment=True,
         download_name="Resume_Ranking.xlsx"
     )
+
+@app.route("/personalized", methods=["GET", "POST"])
+def personalized():
+    if request.method == "POST":
+        selected_skills = request.form.getlist("skills")
+        files = request.files.getlist("resume")
+
+        results = []
+
+        for file in files:
+            path = os.path.join(UPLOAD_FOLDER, file.filename)
+            file.save(path)
+
+            resume_text = extract_text_from_pdf(path)
+
+            # ATS rule: skill counted ONCE
+            resume_words = set(clean_text(resume_text).split())
+
+            matched = [s for s in selected_skills if s.lower() in resume_words]
+            score = (len(matched) / len(selected_skills)) * 100 if selected_skills else 0
+
+            results.append({
+                "name": file.filename,
+                "final_score": round(score, 2),
+                "matched_skills": matched,
+                "missing_skills": list(set(selected_skills) - set(matched))
+            })
+
+        results.sort(key=lambda x: x["final_score"], reverse=True)
+
+        for i, r in enumerate(results):
+            r["rank"] = i + 1
+
+        return render_template("personalized_result.html", results=results)
+
+    return render_template("personalized.html", skills=ALL_SKILLS)
+
 
 
 if __name__ == "__main__":

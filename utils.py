@@ -108,3 +108,35 @@ def calculate_total_score(ats, ml):
 def get_missing_skills(resume_text, must_have_skills):
     resume_text = clean_text(resume_text)
     return [skill for skill in must_have_skills if skill not in resume_text]
+import re
+
+# ---------------- ATS-CORRECT PERSONALIZED SCORING ----------------
+def personalized_ats_score(text, selected_skills):
+    matched = []
+    missing = []
+
+    text = text.lower()
+
+    for skill in selected_skills:
+        # ✅ Skill counted ONLY once (ATS rule)
+        pattern = r"\b" + re.escape(skill.lower()) + r"\b"
+        if re.search(pattern, text):
+            matched.append(skill)
+        else:
+            missing.append(skill)
+
+    if not selected_skills:
+        return 0, [], []
+
+    score = (len(matched) / len(selected_skills)) * 100
+
+    return round(score, 2), matched, missing
+
+
+import re
+
+def clean_text(text):
+    text = text.lower()
+    text = re.sub(r'[^a-z0-9\s]', ' ', text)
+    text = re.sub(r'\s+', ' ', text)
+    return text.strip()

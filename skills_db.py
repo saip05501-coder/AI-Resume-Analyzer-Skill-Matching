@@ -154,3 +154,22 @@ JOB_ROLES = {
         ]
     }
 }
+
+
+ALL_SKILLS = sorted(set([
+    # Programming
+    "python", "java", "c++", "javascript", "sql",
+
+    # Data
+    "machine learning", "deep learning", "statistics",
+    "pandas", "numpy", "tensorflow",
+
+    # Web
+    "html", "css", "react", "node", "django", "flask",
+
+    # Backend
+    "spring", "hibernate", "microservices",
+
+    # Tools
+    "git", "docker", "aws", "linux"
+]))

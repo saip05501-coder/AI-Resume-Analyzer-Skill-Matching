@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Personalized Ranking Results</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f4f6f8;
+            padding: 40px;
+            color: #000;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .table-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        th, td {
+            border: 1px solid #444;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background: #eaeaea;
+            font-weight: 600;
+        }
+
+        .rank {
+            font-weight: 700;
+        }
+
+        .actions {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            background: #2c5364;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* ---------------- PRINT STYLES ---------------- */
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+
+            .actions {
+                display: none;
+            }
+
+            h1 {
+                margin-bottom: 15px;
+            }
+
+            table {
+                font-size: 12px;
+            }
+
+            th {
+                background: #ddd !important;
+                -webkit-print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    
+
+    <div class="table-container">
+        <table>
+            <tr>
+                <th>Rank</th>
+                <th>Resume Name</th>
+                <th>Score (%)</th>
+                <th>Matched Skills</th>
+                <th>Missing Skills</th>
+            </tr>
+
+            {% for r in results %}
+            <tr>
+                <td class="rank">{{ r.rank }}</td>
+                <td>{{ r.name }}</td>
+                <td>{{ r.final_score }}</td>
+                <td>{{ r.matched_skills | join(', ') }}</td>
+                <td>
+                    {% if r.missing_skills %}
+                        {{ r.missing_skills | join(', ') }}
+                    {% else %}
+                        None
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="actions">
+        <button class="btn" onclick="window.print()">Print Result (PDF)</button>
+        <a href="/download_excel" class="btn">Download Excel</a>
+    </div>
+
+    <div class="bottom-left">
+        <a href="/personalized" class="back-btn">← Analyze Again</a>
+    </div>
+</body>
+</html>
